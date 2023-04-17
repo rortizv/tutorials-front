@@ -12,12 +12,12 @@
                     name="description" />
             </div>
 
-            <button (click)="saveTutorial()" class="btn btn-success">Submit</button>
+            <button (click)="saveTutorial()" class="btn btn-success mt-3">Save</button>
         </div>
 
         <div *ngIf="submitted">
-            <h4>Tutorial was submitted successfully!</h4>
-            <button class="btn btn-success" (click)="newTutorial()">Add</button>
+            <h4>Tutorial was created successfully!</h4>
+            <button class="btn btn-success" (click)="newTutorial()">Add another</button>
         </div>
     </div>
 </div>

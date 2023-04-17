@@ -26,7 +26,7 @@
 
 <ng-template #editable>
     <div *ngIf="currentTutorial.id" class="edit-form">
-        <h4>Tutorial</h4>
+        <h4>Tutorial Detail</h4>
         <form>
             <div class="form-group">
                 <label for="title">Title</label>
@@ -38,24 +38,24 @@
                     name="description" />
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-2 mb-2">
                 <label><strong>Status:</strong></label>
-                {{ currentTutorial.published ? "Published" : "Pending" }}
+                {{ currentTutorial.published ? "Published" : "Ready to Publish" }}
             </div>
         </form>
 
-        <button class="badge badge-primary mr-2" *ngIf="currentTutorial.published" (click)="updatePublished(false)">
+        <button class="badge text-bg-secondary mr-2" *ngIf="currentTutorial.published" (click)="updatePublished(false)">
             UnPublish
         </button>
-        <button *ngIf="!currentTutorial.published" class="badge badge-primary mr-2" (click)="updatePublished(true)">
+        <button *ngIf="!currentTutorial.published" class="badge text-bg-primary mr-2" (click)="updatePublished(true)">
             Publish
         </button>
 
-        <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
+        <button class="badge text-bg-danger mr-2" (click)="deleteTutorial()">
             Delete
         </button>
 
-        <button type="submit" class="badge badge-success mb-2" (click)="updateTutorial()">
+        <button type="submit" class="badge text-bg-success mb-2" (click)="updateTutorial()">
             Update
         </button>
         <p>{{ message }}</p>

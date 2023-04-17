@@ -13,17 +13,14 @@
         <h4>Tutorials List</h4>
         <p *ngIf="!tutorials">There are no tutorials to show</p>
         <ul *ngIf="tutorials" class="list-group">
-            <li class="list-group-item" *ngFor="let tutorial of tutorials; let i = index"
-                [class.active]="i == currentIndex" (click)="setActiveTutorial(tutorial, i)">
+            <a class="list-group-item tutorial-item" routerLink="/tutorials/{{ tutorial.id }}"
+             *ngFor="let tutorial of tutorials;">
                 {{ tutorial.title }}
-            </li>
+            </a>
         </ul>
 
         <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
             Remove All
         </button>
-    </div>
-    <div class="col-md-6">
-        <app-tutorial-details [viewMode]="true" [currentTutorial]="currentTutorial"></app-tutorial-details>
     </div>
 </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { TutorialService } from 'src/app/services/tutorial.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tutorials-list',
@@ -14,7 +16,8 @@ export class TutorialListComponent implements OnInit {
   currentIndex = -1;
   title = '';
 
-  constructor(private tutorialService: TutorialService) { }
+  constructor(private tutorialService: TutorialService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.retrieveTutorials();
@@ -43,14 +46,31 @@ export class TutorialListComponent implements OnInit {
   }
 
   removeAllTutorials(): void {
-    this.tutorialService.deleteAll()
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.refreshList();
-        },
-        error: (e) => console.error(e)
+    Swal.fire({
+      title: 'Are you sure you want to delete ALL Tutorials?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.tutorialService.deleteAll()
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+            Swal.fire(
+              'Deleted!',
+              'All Tutorials have been deleted.',
+              'success'
+            )
+            this.refreshList();
+          },
+          error: (e) => console.error(e)
       });
+      }
+    });
   }
 
   searchTitle(): void {

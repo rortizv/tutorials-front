@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { TutorialService } from 'src/app/services/tutorial.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-tutorial',
@@ -31,6 +32,11 @@ export class AddTutorialComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Your tutorial has been created!'
+          });
           this.submitted = true;
         },
         error: (e) => console.error(e)
